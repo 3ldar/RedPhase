@@ -1,0 +1,53 @@
+version: '3.4'
+
+services: 
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    build:
+      context: .
+      dockerfile: src/Gateway/Dockerfile   
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - "5000:80"   
+    restart: on-failure
+  crm:
+    image: ${DOCKER_REGISTRY-}crm
+    build:
+      context: .
+      dockerfile: src/Services/Crm.Api/Dockerfile   
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - "5001:80"
+    depends_on:
+      - postgres
+      - gateway
+      - identity
+    restart: on-failure
+  identity:
+    container_name: identity
+    image: ${DOCKER_REGISTRY-}identity
+    build:
+      context: .
+      dockerfile: src/Services/Identity.Api/Dockerfile   
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - "5002:80"
+    depends_on:
+      - postgres
+    restart: on-failure
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pass}
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

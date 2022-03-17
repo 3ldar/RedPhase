@@ -1,0 +1,10 @@
+version: '3.4'
+
+
+services:
+  crm:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+  gateway:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
