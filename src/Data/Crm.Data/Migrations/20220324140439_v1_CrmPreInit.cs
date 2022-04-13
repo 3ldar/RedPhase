@@ -6,27 +6,34 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace RedPhase.Crm.Data.Migrations
 {
-    public partial class CrmPreInit : Migration
+    public partial class v1_CrmPreInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "Crm");
+
             migrationBuilder.CreateSequence(
                 name: "CustomerId_HiLo",
+                schema: "Crm",
                 startValue: 1000L,
                 incrementBy: 100);
 
             migrationBuilder.CreateSequence(
                 name: "OrganizationId_HiLo",
+                schema: "Crm",
                 startValue: 1000L,
                 incrementBy: 100);
 
             migrationBuilder.CreateSequence(
                 name: "PartyId_HiLo",
+                schema: "Crm",
                 startValue: 1000L,
                 incrementBy: 100);
 
             migrationBuilder.CreateTable(
                 name: "Tokens",
+                schema: "Crm",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -48,6 +55,7 @@ namespace RedPhase.Crm.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Activities",
+                schema: "Crm",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -63,12 +71,14 @@ namespace RedPhase.Crm.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Activities_Tokens_TokenId",
                         column: x => x.TokenId,
+                        principalSchema: "Crm",
                         principalTable: "Tokens",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Parties",
+                schema: "Crm",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
@@ -90,18 +100,21 @@ namespace RedPhase.Crm.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Parties_Activities_CreateActivityId",
                         column: x => x.CreateActivityId,
+                        principalSchema: "Crm",
                         principalTable: "Activities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Parties_Activities_UpdateActivityId",
                         column: x => x.UpdateActivityId,
+                        principalSchema: "Crm",
                         principalTable: "Activities",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Customers",
+                schema: "Crm",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
@@ -127,17 +140,20 @@ namespace RedPhase.Crm.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Customers_Activities_CreateActivityId",
                         column: x => x.CreateActivityId,
+                        principalSchema: "Crm",
                         principalTable: "Activities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Customers_Activities_UpdateActivityId",
                         column: x => x.UpdateActivityId,
+                        principalSchema: "Crm",
                         principalTable: "Activities",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Customers_Parties_Id",
                         column: x => x.Id,
+                        principalSchema: "Crm",
                         principalTable: "Parties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -145,6 +161,7 @@ namespace RedPhase.Crm.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Organizations",
+                schema: "Crm",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
@@ -169,17 +186,20 @@ namespace RedPhase.Crm.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Organizations_Activities_CreateActivityId",
                         column: x => x.CreateActivityId,
+                        principalSchema: "Crm",
                         principalTable: "Activities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Organizations_Activities_UpdateActivityId",
                         column: x => x.UpdateActivityId,
+                        principalSchema: "Crm",
                         principalTable: "Activities",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Organizations_Parties_Id",
                         column: x => x.Id,
+                        principalSchema: "Crm",
                         principalTable: "Parties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -187,36 +207,43 @@ namespace RedPhase.Crm.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Activities_TokenId",
+                schema: "Crm",
                 table: "Activities",
                 column: "TokenId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_CreateActivityId",
+                schema: "Crm",
                 table: "Customers",
                 column: "CreateActivityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_UpdateActivityId",
+                schema: "Crm",
                 table: "Customers",
                 column: "UpdateActivityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Organizations_CreateActivityId",
+                schema: "Crm",
                 table: "Organizations",
                 column: "CreateActivityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Organizations_UpdateActivityId",
+                schema: "Crm",
                 table: "Organizations",
                 column: "UpdateActivityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Parties_CreateActivityId",
+                schema: "Crm",
                 table: "Parties",
                 column: "CreateActivityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Parties_UpdateActivityId",
+                schema: "Crm",
                 table: "Parties",
                 column: "UpdateActivityId");
         }
@@ -224,28 +251,36 @@ namespace RedPhase.Crm.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Customers",
+                schema: "Crm");
 
             migrationBuilder.DropTable(
-                name: "Organizations");
+                name: "Organizations",
+                schema: "Crm");
 
             migrationBuilder.DropTable(
-                name: "Parties");
+                name: "Parties",
+                schema: "Crm");
 
             migrationBuilder.DropTable(
-                name: "Activities");
+                name: "Activities",
+                schema: "Crm");
 
             migrationBuilder.DropTable(
-                name: "Tokens");
+                name: "Tokens",
+                schema: "Crm");
 
             migrationBuilder.DropSequence(
-                name: "CustomerId_HiLo");
+                name: "CustomerId_HiLo",
+                schema: "Crm");
 
             migrationBuilder.DropSequence(
-                name: "OrganizationId_HiLo");
+                name: "OrganizationId_HiLo",
+                schema: "Crm");
 
             migrationBuilder.DropSequence(
-                name: "PartyId_HiLo");
+                name: "PartyId_HiLo",
+                schema: "Crm");
         }
     }
 }

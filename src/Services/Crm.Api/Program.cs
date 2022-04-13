@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCustomAuthentication(config);
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddCustomDbContext<CrmDbContext>(config);
 
 var app = builder.Build();

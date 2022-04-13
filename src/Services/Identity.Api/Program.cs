@@ -18,6 +18,7 @@ try
         .ReadFrom.Configuration(ctx.Configuration));
 
     var services = builder.Services;
+    
 
     var app = builder
         .ConfigureServices()

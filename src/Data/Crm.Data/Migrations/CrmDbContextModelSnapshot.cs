@@ -17,6 +17,7 @@ namespace RedPhase.Crm.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("Crm")
                 .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -60,7 +61,7 @@ namespace RedPhase.Crm.Data.Migrations
 
                     b.HasIndex("TokenId");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activities", "Crm");
                 });
 
             modelBuilder.Entity("RedPhase.Entities.Base.DbToken", b =>
@@ -102,7 +103,7 @@ namespace RedPhase.Crm.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tokens");
+                    b.ToTable("Tokens", "Crm");
                 });
 
             modelBuilder.Entity("RedPhase.Entities.Crm.Customer", b =>
@@ -175,7 +176,7 @@ namespace RedPhase.Crm.Data.Migrations
 
                     b.HasIndex("UpdateActivityId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", "Crm");
                 });
 
             modelBuilder.Entity("RedPhase.Entities.Crm.Organization", b =>
@@ -234,7 +235,7 @@ namespace RedPhase.Crm.Data.Migrations
 
                     b.HasIndex("UpdateActivityId");
 
-                    b.ToTable("Organizations");
+                    b.ToTable("Organizations", "Crm");
                 });
 
             modelBuilder.Entity("RedPhase.Entities.Crm.Party", b =>
@@ -289,7 +290,7 @@ namespace RedPhase.Crm.Data.Migrations
 
                     b.HasIndex("UpdateActivityId");
 
-                    b.ToTable("Parties");
+                    b.ToTable("Parties", "Crm");
                 });
 
             modelBuilder.Entity("RedPhase.Entities.Identity.IdentityUser", b =>

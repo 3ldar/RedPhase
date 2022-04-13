@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Crm.Data\Crm.Data.csproj" />
+    <ProjectReference Include="..\..\SharedDependencies\SharedDependencies.csproj" />
   </ItemGroup>
 
 </Project>

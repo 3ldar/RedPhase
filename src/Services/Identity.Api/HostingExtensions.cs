@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using RedPhase.Identity.Api.Data;
+using RedPhase.Identity.Api.Services;
 
 using Serilog;
 
@@ -50,8 +51,9 @@ internal static class HostingExtensions
                    options.ConfigureDbContext = b => b.UseNpgsql(connectionString,
                        sql => sql.MigrationsAssembly(migrationsAssembly));
                })
-            .AddAspNetIdentity<ApplicationUser>();
-
+             .AddProfileService<ProfileService>()
+            .AddAspNetIdentity<ApplicationUser>()
+            .Services.AddTransient<Duende.IdentityServer.Services.IProfileService, ProfileService>();
 
         return builder.Build();
     }

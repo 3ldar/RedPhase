@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 using RedPhase.Entities.Base;
@@ -9,8 +10,11 @@ namespace RedPhase.Crm.Data;
 
 public partial class CrmDbContext : DbContext
 {
-    public CrmDbContext(DbContextOptions<CrmDbContext> options) : base(options)
+    private readonly IHttpContextAccessor httpContextAccessor;
+
+    public CrmDbContext(DbContextOptions<CrmDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
     {
+        this.httpContextAccessor = httpContextAccessor;
     }
 
     public virtual DbSet<DbActivity> Activities { get; set; }
