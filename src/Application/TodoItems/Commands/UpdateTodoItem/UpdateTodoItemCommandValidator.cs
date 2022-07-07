@@ -6,7 +6,7 @@ public class UpdateTodoItemCommandValidator : AbstractValidator<UpdateTodoItemCo
 {
     public UpdateTodoItemCommandValidator()
     {
-        RuleFor(v => v.Title)
+        this.RuleFor(v => v.Title)
             .MaximumLength(200)
             .NotEmpty();
     }

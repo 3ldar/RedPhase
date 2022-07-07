@@ -11,14 +11,14 @@ public class TodoItemCompletedEventHandler : INotificationHandler<DomainEventNot
 
     public TodoItemCompletedEventHandler(ILogger<TodoItemCompletedEventHandler> logger)
     {
-        _logger = logger;
+        this._logger = logger;
     }
 
     public Task Handle(DomainEventNotification<TodoItemCompletedEvent> notification, CancellationToken cancellationToken)
     {
         var domainEvent = notification.DomainEvent;
 
-        _logger.LogInformation("RedPhase Domain Event: {DomainEvent}", domainEvent.GetType().Name);
+        this._logger.LogInformation("RedPhase Domain Event: {DomainEvent}", domainEvent.GetType().Name);
 
         return Task.CompletedTask;
     }

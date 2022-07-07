@@ -12,23 +12,23 @@ public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where T
 
     public LoggingBehaviour(ILogger<TRequest> logger, ICurrentUserService currentUserService, IIdentityService identityService)
     {
-        _logger = logger;
-        _currentUserService = currentUserService;
-        _identityService = identityService;
+        this._logger = logger;
+        this._currentUserService = currentUserService;
+        this._identityService = identityService;
     }
 
     public async Task Process(TRequest request, CancellationToken cancellationToken)
     {
         var requestName = typeof(TRequest).Name;
-        var userId = _currentUserService.UserId ?? string.Empty;
+        var userId = this._currentUserService.UserId ?? string.Empty;
         string userName = string.Empty;
 
         if (!string.IsNullOrEmpty(userId))
         {
-            userName = await _identityService.GetUserNameAsync(userId);
+            userName = await this._identityService.GetUserNameAsync(userId);
         }
 
-        _logger.LogInformation("RedPhase Request: {Name} {@UserId} {@UserName} {@Request}",
+        this._logger.LogInformation("RedPhase Request: {Name} {@UserId} {@UserName} {@Request}",
             requestName, userId, userName, request);
     }
 }

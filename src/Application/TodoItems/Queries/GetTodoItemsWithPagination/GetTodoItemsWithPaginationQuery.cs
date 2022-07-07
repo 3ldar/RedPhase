@@ -21,16 +21,16 @@ public class GetTodoItemsWithPaginationQueryHandler : IRequestHandler<GetTodoIte
 
     public GetTodoItemsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
-        _context = context;
-        _mapper = mapper;
+        this._context = context;
+        this._mapper = mapper;
     }
 
     public async Task<PaginatedList<TodoItemBriefDto>> Handle(GetTodoItemsWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        return await _context.TodoItems
+        return await this._context.TodoItems
             .Where(x => x.ListId == request.ListId)
             .OrderBy(x => x.Title)
-            .ProjectTo<TodoItemBriefDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<TodoItemBriefDto>(this._mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }
 }

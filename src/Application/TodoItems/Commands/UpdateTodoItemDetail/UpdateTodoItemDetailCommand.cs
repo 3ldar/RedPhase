@@ -23,12 +23,12 @@ public class UpdateTodoItemDetailCommandHandler : IRequestHandler<UpdateTodoItem
 
     public UpdateTodoItemDetailCommandHandler(IApplicationDbContext context)
     {
-        _context = context;
+        this._context = context;
     }
 
     public async Task<Unit> Handle(UpdateTodoItemDetailCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.TodoItems
+        var entity = await this._context.TodoItems
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         if (entity == null)
@@ -40,7 +40,7 @@ public class UpdateTodoItemDetailCommandHandler : IRequestHandler<UpdateTodoItem
         entity.Priority = request.Priority;
         entity.Note = request.Note;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await this._context.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
     }

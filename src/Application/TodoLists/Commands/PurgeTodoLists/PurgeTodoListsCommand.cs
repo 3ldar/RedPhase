@@ -16,14 +16,14 @@ public class PurgeTodoListsCommandHandler : IRequestHandler<PurgeTodoListsComman
 
     public PurgeTodoListsCommandHandler(IApplicationDbContext context)
     {
-        _context = context;
+        this._context = context;
     }
 
     public async Task<Unit> Handle(PurgeTodoListsCommand request, CancellationToken cancellationToken)
     {
-        _context.TodoLists.RemoveRange(_context.TodoLists);
+        this._context.TodoLists.RemoveRange(this._context.TodoLists);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await this._context.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
     }

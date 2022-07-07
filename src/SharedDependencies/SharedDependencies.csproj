@@ -1,38 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <RootNamespace>$(SolutionName).$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <AssemblyName>$(SolutionName).$(MSBuildProjectName)</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.3.0" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
-    <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <PackageReference Include="Autofac" Version="6.4.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="DotNetCore.CAP" Version="6.0.0" />
-    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="6.0.0" />
-    <PackageReference Include="DotNetCore.CAP.Kafka" Version="6.0.0" />
-    <PackageReference Include="DotNetCore.CAP.PostgreSql" Version="6.0.0" />
-    <PackageReference Include="FluentValidation" Version="10.3.6" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
+    <PackageReference Include="DotNetCore.CAP" Version="6.1.0" />
+    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="6.1.0" />
+    <PackageReference Include="DotNetCore.CAP.Kafka" Version="6.1.0" />
+    <PackageReference Include="DotNetCore.CAP.PostgreSql" Version="6.1.0" />
+    <PackageReference Include="FluentValidation" Version="11.1.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0-preview.5.22303.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-preview.5.22302.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0-preview.5.22302.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
-    <PackageReference Include="StackExchange.Redis" Version="2.2.88" />
-    <PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="8.0.2" />
-    <PackageReference Include="StackExchange.Redis.Extensions.Core" Version="8.0.2" />
-    <PackageReference Include="StackExchange.Redis.Extensions.System.Text.Json" Version="8.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0-preview.5" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.48" />
+    <PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="8.0.5" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Core" Version="8.0.5" />
+    <PackageReference Include="StackExchange.Redis.Extensions.System.Text.Json" Version="8.0.5" />
   </ItemGroup>
 
   <ItemGroup>

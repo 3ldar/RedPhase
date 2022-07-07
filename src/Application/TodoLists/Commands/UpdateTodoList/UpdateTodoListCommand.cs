@@ -18,12 +18,12 @@ public class UpdateTodoListCommandHandler : IRequestHandler<UpdateTodoListComman
 
     public UpdateTodoListCommandHandler(IApplicationDbContext context)
     {
-        _context = context;
+        this._context = context;
     }
 
     public async Task<Unit> Handle(UpdateTodoListCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.TodoLists
+        var entity = await this._context.TodoLists
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         if (entity == null)
@@ -33,7 +33,7 @@ public class UpdateTodoListCommandHandler : IRequestHandler<UpdateTodoListComman
 
         entity.Title = request.Title;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await this._context.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
     }

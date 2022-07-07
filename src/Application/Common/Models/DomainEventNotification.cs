@@ -7,7 +7,7 @@ public class DomainEventNotification<TDomainEvent> : INotification where TDomain
 {
     public DomainEventNotification(TDomainEvent domainEvent)
     {
-        DomainEvent = domainEvent;
+        this.DomainEvent = domainEvent;
     }
 
     public TDomainEvent DomainEvent { get; }

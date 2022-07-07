@@ -4,9 +4,9 @@ public class ExportTodosVm
 {
     public ExportTodosVm(string fileName, string contentType, byte[] content)
     {
-        FileName = fileName;
-        ContentType = contentType;
-        Content = content;
+        this.FileName = fileName;
+        this.ContentType = contentType;
+        this.Content = content;
     }
 
     public string FileName { get; set; }

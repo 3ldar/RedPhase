@@ -16,6 +16,7 @@ public class PersistedGrantDbContext : DbContext, IPersistedGrantDbContext
     public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
 
     public DbSet<Key> Keys { get; set; }
+    public DbSet<ServerSideSession> ServerSideSessions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

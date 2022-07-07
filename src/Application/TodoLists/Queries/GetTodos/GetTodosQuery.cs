@@ -18,8 +18,8 @@ public class GetTodosQueryHandler : IRequestHandler<GetTodosQuery, TodosVm>
 
     public GetTodosQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
-        _context = context;
-        _mapper = mapper;
+        this._context = context;
+        this._mapper = mapper;
     }
 
     public async Task<TodosVm> Handle(GetTodosQuery request, CancellationToken cancellationToken)
@@ -31,9 +31,9 @@ public class GetTodosQueryHandler : IRequestHandler<GetTodosQuery, TodosVm>
                 .Select(p => new PriorityLevelDto { Value = (int)p, Name = p.ToString() })
                 .ToList(),
 
-            Lists = await _context.TodoLists
+            Lists = await this._context.TodoLists
                 .AsNoTracking()
-                .ProjectTo<TodoListDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<TodoListDto>(this._mapper.ConfigurationProvider)
                 .OrderBy(t => t.Title)
                 .ToListAsync(cancellationToken)
         };

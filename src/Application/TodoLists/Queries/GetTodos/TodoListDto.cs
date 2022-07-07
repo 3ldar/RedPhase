@@ -7,7 +7,7 @@ public class TodoListDto : IMapFrom<TodoList>
 {
     public TodoListDto()
     {
-        Items = new List<TodoItemDto>();
+        this.Items = new List<TodoItemDto>();
     }
 
     public int Id { get; set; }

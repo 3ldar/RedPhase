@@ -17,12 +17,12 @@ public class DeleteTodoListCommandHandler : IRequestHandler<DeleteTodoListComman
 
     public DeleteTodoListCommandHandler(IApplicationDbContext context)
     {
-        _context = context;
+        this._context = context;
     }
 
     public async Task<Unit> Handle(DeleteTodoListCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.TodoLists
+        var entity = await this._context.TodoLists
             .Where(l => l.Id == request.Id)
             .SingleOrDefaultAsync(cancellationToken);
 
@@ -31,9 +31,9 @@ public class DeleteTodoListCommandHandler : IRequestHandler<DeleteTodoListComman
             throw new NotFoundException(nameof(TodoList), request.Id);
         }
 
-        _context.TodoLists.Remove(entity);
+        this._context.TodoLists.Remove(entity);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await this._context.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
     }

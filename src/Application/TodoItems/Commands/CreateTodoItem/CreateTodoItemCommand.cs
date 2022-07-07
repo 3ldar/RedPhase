@@ -18,7 +18,7 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemComman
 
     public CreateTodoItemCommandHandler(IApplicationDbContext context)
     {
-        _context = context;
+        this._context = context;
     }
 
     public async Task<int> Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
@@ -32,9 +32,9 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemComman
 
         entity.DomainEvents.Add(new TodoItemCreatedEvent(entity));
 
-        _context.TodoItems.Add(entity);
+        this._context.TodoItems.Add(entity);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await this._context.SaveChangesAsync(cancellationToken);
 
         return entity.Id;
     }

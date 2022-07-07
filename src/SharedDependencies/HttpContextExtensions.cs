@@ -4,6 +4,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
 namespace RedPhase.SharedDependencies;
+
 public static class HttpContextExtensions
 {
     public static TokenUserInfo GetUserInfo(this HttpContext context)
@@ -37,18 +38,11 @@ public static class HttpContextExtensions
         return userInfo;
     }
 
-    private static object GetValue(string v, Type targetType)
+    private static object GetValue(string v, Type targetType) => targetType.Name switch
     {
-        switch (targetType.Name)
-        {
-            case "Int32":
-                return int.Parse(v);
-            case "String":
-                return v;
-            case "Guid":
-                return Guid.Parse(v);
-            default:
-                return null;
-        }
-    }
+        "Int32" => int.Parse(v),
+        "String" => v,
+        "Guid" => Guid.Parse(v),
+        _ => null,
+    };
 }

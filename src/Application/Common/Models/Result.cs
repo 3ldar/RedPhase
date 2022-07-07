@@ -4,8 +4,8 @@ public class Result
 {
     internal Result(bool succeeded, IEnumerable<string> errors)
     {
-        Succeeded = succeeded;
-        Errors = errors.ToArray();
+        this.Succeeded = succeeded;
+        this.Errors = errors.ToArray();
     }
 
     public bool Succeeded { get; set; }

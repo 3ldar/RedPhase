@@ -15,7 +15,7 @@ public class CreateTodoListCommandHandler : IRequestHandler<CreateTodoListComman
 
     public CreateTodoListCommandHandler(IApplicationDbContext context)
     {
-        _context = context;
+        this._context = context;
     }
 
     public async Task<int> Handle(CreateTodoListCommand request, CancellationToken cancellationToken)
@@ -24,9 +24,9 @@ public class CreateTodoListCommandHandler : IRequestHandler<CreateTodoListComman
 
         entity.Title = request.Title;
 
-        _context.TodoLists.Add(entity);
+        this._context.TodoLists.Add(entity);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await this._context.SaveChangesAsync(cancellationToken);
 
         return entity.Id;
     }

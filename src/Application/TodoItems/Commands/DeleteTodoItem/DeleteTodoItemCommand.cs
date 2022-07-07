@@ -17,12 +17,12 @@ public class DeleteTodoItemCommandHandler : IRequestHandler<DeleteTodoItemComman
 
     public DeleteTodoItemCommandHandler(IApplicationDbContext context)
     {
-        _context = context;
+        this._context = context;
     }
 
     public async Task<Unit> Handle(DeleteTodoItemCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.TodoItems
+        var entity = await this._context.TodoItems
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         if (entity == null)
@@ -30,11 +30,11 @@ public class DeleteTodoItemCommandHandler : IRequestHandler<DeleteTodoItemComman
             throw new NotFoundException(nameof(TodoItem), request.Id);
         }
 
-        _context.TodoItems.Remove(entity);
+        this._context.TodoItems.Remove(entity);
 
         entity.DomainEvents.Add(new TodoItemDeletedEvent(entity));
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await this._context.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
     }

@@ -19,22 +19,22 @@ public class ExportTodosQueryHandler : IRequestHandler<ExportTodosQuery, ExportT
 
     public ExportTodosQueryHandler(IApplicationDbContext context, IMapper mapper, ICsvFileBuilder fileBuilder)
     {
-        _context = context;
-        _mapper = mapper;
-        _fileBuilder = fileBuilder;
+        this._context = context;
+        this._mapper = mapper;
+        this._fileBuilder = fileBuilder;
     }
 
     public async Task<ExportTodosVm> Handle(ExportTodosQuery request, CancellationToken cancellationToken)
     {
-        var records = await _context.TodoItems
+        var records = await this._context.TodoItems
                 .Where(t => t.ListId == request.ListId)
-                .ProjectTo<TodoItemRecord>(_mapper.ConfigurationProvider)
+                .ProjectTo<TodoItemRecord>(this._mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
         var vm = new ExportTodosVm(
             "TodoItems.csv",
             "text/csv",
-            _fileBuilder.BuildTodoItemsFile(records));
+            this._fileBuilder.BuildTodoItemsFile(records));
 
         return vm;
     }
